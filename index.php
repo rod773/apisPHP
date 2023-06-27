@@ -35,7 +35,9 @@ if ($resource != "task") {
     exit;
 }
 
+$database = new Database("localhost", "api_db", "root", "");
 
+$database->getConnection();
 
 $controller = new TaskController;
 
