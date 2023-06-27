@@ -46,7 +46,7 @@ $database = new Database(
     $_ENV['DB_PASS']
 );
 
-$database->getConnection();
+//$database->getConnection();
 
 $controller = new TaskController;
 
