@@ -22,11 +22,18 @@ class TaskController
             }
         } else {
 
+            $task = $this->gateway->get($id);
+
+            if($task===false){
+                $this->respondNotFound($id);
+                return;
+            }
+
             switch ($method) {
 
                 case "GET":
                     echo 
-                    json_encode($this->gateway->get($id));
+                    json_encode($task);
                     break;
 
                 case "PATCH":
@@ -49,5 +56,14 @@ class TaskController
     {
         http_response_code(405);
         header("Allow: $allowed_methods");
+    }
+
+
+    private function respondNotFound($id){
+        http_response_code((404));
+
+        echo json_encode([
+            "message"=>"task with id $id not found"
+        ]);
     }
 }
