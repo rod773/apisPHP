@@ -44,7 +44,9 @@ class Database
             );
             // set the PDO error mode to exception
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            echo "Connected successfully\n";
+            $conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+            $conn->setAttribute(PDO::ATTR_STRINGIFY_FETCHES, false);
+            //echo "Connected successfully\n";
             return $conn;
         } catch (PDOException $e) {
             echo "Connection failed: " . $e->getMessage() . "\n";

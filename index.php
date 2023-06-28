@@ -16,18 +16,13 @@ $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 $parts = array_filter(explode("/", $path));
 
-print_r($parts);
 
-echo "\n";
 
 $resource = $parts[1] ?? null;
 
 $id = $parts[2] ?? null;
 
 $method = $_SERVER['REQUEST_METHOD'];
-
-echo $method . "\n";
-
 
 
 
@@ -49,7 +44,7 @@ $database = new Database(
 
 
 
-print_r($database);
+
 
 
 
