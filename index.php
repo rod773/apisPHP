@@ -46,8 +46,18 @@ $database = new Database(
     $_ENV['DB_PASS']
 );
 
+
+
+
+print_r($database);
+
+
+
+
 //$database->getConnection();
 
-$controller = new TaskController;
+$task_gateway = new TaskGateway($database);
+
+$controller = new TaskController($task_gateway);
 
 $controller->processRequest($method, $id);

@@ -1,5 +1,7 @@
 <?php
 
+
+
 class Database
 {
     public function __construct(
@@ -11,18 +13,44 @@ class Database
     }
 
 
-    public function getConnection(): PDO
+    public function getConnection()
     {
 
-        $dsn =
-            "mysql:host = {$this->host};" .
-            "mysql:dnbame = {$this->name};" .
-            "mysql:charset = UTF-8";
+        // $conn = new PDO(
+        //     "mysql:host=$this->host;dbname=$this->name",
+        //     $this->user, $this->password
+        // );
 
-        return new PDO(
-            $dsn, $this->user, $this->password,
-            [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
-        );
+        // $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
+        //************************ */
+
+        // $conn = new mysqli($this->host, $this->user, $this->password);
+
+        // // Check connection
+        // if ($conn->connect_error) {
+        //     die("Connection failed: " . $conn->connect_error);
+        // }
+        // echo "Connected successfully\n";
+
+
+        //******************************* */
+
+        try {
+            $conn = new PDO(
+                "mysql:host=$this->host;dbname=$this->name",
+                $this->user, $this->password
+            );
+            // set the PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            echo "Connected successfully\n";
+            return $conn;
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage() . "\n";
+        }
+
+
 
     }
 
